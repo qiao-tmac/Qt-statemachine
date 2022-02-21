@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QSignalTransition>
 #include <QPropertyAnimation>
+#include <QMessageBox>
 
 int main(int argc, char* argv[]){
     QApplication app(argc,argv);
