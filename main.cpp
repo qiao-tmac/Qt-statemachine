@@ -6,6 +6,7 @@
 #include <QSignalTransition>
 #include <QPropertyAnimation>
 #include <QMessageBox>
+#include <QTextEdit>
 
 int main(int argc, char* argv[]){
     QApplication app(argc,argv);
@@ -41,5 +42,17 @@ int main(int argc, char* argv[]){
     machine.start();
     button.show();
 //    QObject::connect(state3,&QState::entered,&button,&QPushButton::showMinimized);
+
+    QMessageBox *messagebox = new QMessageBox;
+    messagebox->addButton(QMessageBox::Ok);
+    messagebox->setText("Button geomery has been set!");
+    messagebox->setIcon(QMessageBox::Information);
+    QState* s1 = new QState();
+    QState* s2 = new QState();
+
+    s2->assignProperty(&button,"geometry",QRect(0,0,50,50));
+    QObject::connect(s2,&QState::entered,messagebox,&QMessageBox::exec);
+    s1->addTransition(&button,SIGNAL(clicked()),state2);
+
     return app.exec();
 }
